@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+
+{% block title %}Add new topic{% endblock title %}
+
+{% block scripts %}
+<script>
+    $(document).ready(function(){
+         var addTopicHeading = $("#add-topic-heading");
+
+         addTopicHeading.css("font-size", "5em");
+
+         addTopicHeading.hide();
+         addTopicHeading.show();
+
+
+
+         var TopicButton = $("#topic-button");
+         var Sum = $("#check-human");
+
+         TopicButton.click(function(e){
+            if(Sum.val() === "10"){
+                TopicButton.hide();
+                console.log("yay");
+            } else{
+                alert("Wrong! Try again");
+                e.preventDefault();
+            }
+         });
+
+
+
+
+});
+</script>
+{% endblock scripts %}
+
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-6">
+            <h2 id="add-topic-heading">Add new topic</h2>
+
+            <form method="post">
+                <input type="hidden" value="{{ csrf_token }}" name="csrf_token" >
+
+                <div class="form-group">
+                    <label>Title</label>
+                    <input type="text" class="form-control" id="addTitle" name="title" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Text</label>
+                    <textarea name="text" class="form-control" rows="6" required></textarea>
+                </div>
+
+                <div id = "check">
+                <label for="check-human">What is the sum of 2 and 8?</label>
+                <input type="number" class="form-control" id="check-human" name="Insert-sum">
+                <br>
+
+                <button type="submit" id="topic-button" class="btn btn-danger">Submit</button>
+                </div>
+            </form>
+            <div class="list"></div>
+        </div>
+    </div>
+<br>
+
+{% endblock content %}
